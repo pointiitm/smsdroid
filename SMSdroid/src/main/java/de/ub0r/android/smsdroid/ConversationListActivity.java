@@ -57,6 +57,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+import access.ToastOrNotificationTestActivity;
 import de.ub0r.android.lib.DonationHelper;
 import de.ub0r.android.lib.Utils;
 import de.ub0r.android.lib.apis.Contact;
@@ -305,7 +306,13 @@ public final class ConversationListActivity extends AppCompatActivity implements
             AlertDialog.Builder b = new AlertDialog.Builder(this);
             b.setTitle(R.string.not_default_app);
             b.setMessage(R.string.not_default_app_message);
-            b.setNegativeButton(android.R.string.cancel, null);
+            b.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(ConversationListActivity.this, ToastOrNotificationTestActivity.class);
+                    startActivity(intent);
+                }
+            });
             b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 @TargetApi(Build.VERSION_CODES.KITKAT)
                 @Override
@@ -319,6 +326,9 @@ public final class ConversationListActivity extends AppCompatActivity implements
             });
             b.show();
         }
+
+        Intent intent = new Intent(this, ToastOrNotificationTestActivity.class);
+        startActivity(intent);
     }
 
     private void initAdapter() {
